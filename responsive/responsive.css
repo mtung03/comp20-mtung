@@ -1,1 +1,59 @@
-l
+ .panel-one {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 0 0px;
+ } 
+
+ .panel-two {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 129 0px;
+ } 
+
+ .panel-three {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 257 0px;
+ } 
+
+ .panel-four {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 385 0px;
+ } 
+
+ .panel-five {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 513 0px;
+ } 
+
+ .panel-one {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 0 -140px;
+ } 
+
+ .panel-two {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 129-140px;
+ } 
+
+ .panel-three {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 257-140px;
+ } 
+
+ .panel-four {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 385-140px;
+ } 
+
+ .panel-five {
+ 	width: 128px;
+ 	height: 140px; 
+ 	background: url(images/software.png) 513-140px;
+ } 
