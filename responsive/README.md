@@ -1,5 +1,7 @@
 Comp 20 Week 2 - Making responsive websites
 
+Write a CSS stylesheet that displays portions of a comic strip depending on the width of the browser screen.
+
 files:
 index.html - written by instructor
 software.png - image provided by instructor
