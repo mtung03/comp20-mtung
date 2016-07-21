@@ -17,7 +17,7 @@
       message_section = "";
 
       for (i = 0; i < data.length; i++) {
-        message_section = "<p id=\"message\">" + data[i]["content"] + "<span id=\"sender\">" + data[i]["username"] + "</span></p>"; 
+        message_section = message_section + "<p id=\"message\">" + data[i]["content"] + "<span id=\"sender\">" + data[i]["username"] + "</span></p>"; 
       }
 
       messages.innerHTML = message_section
