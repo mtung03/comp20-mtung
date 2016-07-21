@@ -2,6 +2,21 @@ h1 {
 	text-align: center;
 }
 
+body {
+	text-align: center;
+}
+
+video {
+	display: block;
+	margin: 0 auto;
+}
+
 #lyrics {
-	max-width: 25%;
+	padding-top: 4px;
+	text-align: center;
+}
+
+img {
+	display: inline-block;
+	max-height: 60px;
 }

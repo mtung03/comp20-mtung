@@ -17,7 +17,9 @@
 		<script>
 			var video = document.getElementById("music_video");
 			var song_lyrics = new Object;
-			song_lyrics["stanza_one"] = ["The sun shines bright in My Old Kentucky Home,",
+			var kentucky_img = "<img src=\"images/kentucky.png\" alt=\"Kentucky\"/>";
+
+			song_lyrics["stanza_one"] = ["The sun shines bright in My Old " + kentucky_img  + "Home,",
 										 "'Tis summer, the people are gay;",
 										 "The corn-top's ripe and the meadow's in the bloom",
 										 "While the birds make music all the day."];
@@ -25,16 +27,16 @@
 			song_lyrics["stanza_two"] = ["The young folks roll on the little cabin floor,",
 										 "All merry, all happy and bright;",
 										 "By 'n' by hard times comes a knocking at the door,",
-										 "Then My Old Kentucky Home, good night!"];
+										 "Then My Old " + kentucky_img + " Home, good night!"];
 
 			song_lyrics["chorus"] = ["Weep no more my lady",
 									 "Oh weep no more today;",
 									 "We will sing one song",
-									 "For My Old Kentucky Home",
-									 "For My Old Kentucky Home, far away"];
+									 "For My Old " + kentucky_img + " Home",
+									 "For My Old " + kentucky_img + " Home, far away"];
 
 			video.addEventListener("timeupdate", function() {
-  				if (video.currentTime > 7 && video.currentTime <= 15) {
+  				if (video.currentTime > 9 && video.currentTime <= 15) {
   					lyrics.innerHTML = song_lyrics["stanza_one"][0];
   				} else if (video.currentTime > 15 && video.currentTime <= 21){
   					lyrics.innerHTML = song_lyrics["stanza_one"][1];
@@ -46,9 +48,9 @@
   					lyrics.innerHTML = song_lyrics["stanza_two"][0];
   				} else if (video.currentTime > 42 && video.currentTime <= 49){
   					lyrics.innerHTML = song_lyrics["stanza_two"][1];
-  				} else if (video.currentTime > 49 && video.currentTime <= 55){
+  				} else if (video.currentTime > 49 && video.currentTime <= 56){
   					lyrics.innerHTML = song_lyrics["stanza_two"][2];
-  				} else if (video.currentTime > 55 && video.currentTime <= 64){
+  				} else if (video.currentTime > 56 && video.currentTime <= 64){
   					lyrics.innerHTML = song_lyrics["stanza_two"][3];
   				} else if (video.currentTime > 64 && video.currentTime <= 69){
   					lyrics.innerHTML = song_lyrics["chorus"][0];
@@ -56,9 +58,9 @@
   					lyrics.innerHTML = song_lyrics["chorus"][1];
   				} else if (video.currentTime > 76 && video.currentTime <= 80){
   					lyrics.innerHTML = song_lyrics["chorus"][2];
-  				} else if (video.currentTime > 80 && video.currentTime <= 83){
+  				} else if (video.currentTime > 80 && video.currentTime <= 84){
   					lyrics.innerHTML = song_lyrics["chorus"][3];
-  				} else if (video.currentTime > 83 && video.currentTime <= 92){
+  				} else if (video.currentTime > 84 && video.currentTime <= 91.5){
   					lyrics.innerHTML = song_lyrics["chorus"][4];
   				}
 			  		/* update lyrics here wutg video.currentTime */
