@@ -11,17 +11,13 @@
 
       var data = JSON.parse(jsonData);
 
-      console.log(data);
-      var messages = document.getElementById("messages");
-
       message_section = "";
 
       for (i = 0; i < data.length; i++) {
         message_section = message_section + "<p id=\"message\">" + data[i]["content"] + "<span id=\"sender\">" + data[i]["username"] + "</span></p>"; 
       }
-
-      messages.innerHTML = message_section
-      // Your code here......
+      
+      document.getElementById("messages").innerHTML = message_section;
     }
   </script>
 </head>
