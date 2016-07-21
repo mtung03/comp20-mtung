@@ -18,11 +18,12 @@
 			var video = document.getElementById("music_video");
 			var song_lyrics = new Object;
 			var kentucky_img = "<img src=\"images/kentucky.png\" alt=\"Kentucky\"/>";
+			var music_img = "<img src=\"images/music.jpeg\" alt=\"music notes\"/>";
 
 			song_lyrics["stanza_one"] = ["The sun shines bright in My Old " + kentucky_img  + "Home,",
 										 "'Tis summer, the people are gay;",
 										 "The corn-top's ripe and the meadow's in the bloom",
-										 "While the birds make music all the day."];
+										 music_img + "While the birds make music all the day." + music_img];
 
 			song_lyrics["stanza_two"] = ["The young folks roll on the little cabin floor,",
 										 "All merry, all happy and bright;",
@@ -60,10 +61,11 @@
   					lyrics.innerHTML = song_lyrics["chorus"][2];
   				} else if (video.currentTime > 80 && video.currentTime <= 84){
   					lyrics.innerHTML = song_lyrics["chorus"][3];
-  				} else if (video.currentTime > 84 && video.currentTime <= 91.5){
+  				} else if (video.currentTime > 84 && video.currentTime <= 92){
   					lyrics.innerHTML = song_lyrics["chorus"][4];
+  				} else {
+			  		lyrics.innerHTML = "";  // clear lyrics after song end
   				}
-			  		/* update lyrics here wutg video.currentTime */
 			});
 		</script>
 	</body>
