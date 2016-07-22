@@ -41,14 +41,7 @@ function init()
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
     map = addMarkers(map);
-
-  //     var flightPath = new google.maps.Polyline({
-  //   path: flightPlanCoordinates,
-  //   geodesic: true,
-  //   strokeColor: '#FF0000',
-  //   strokeOpacity: 1.0,
-  //   strokeWeight: 2
-  // });
+    map = addRedLine(map);
 
 }
 
@@ -69,4 +62,40 @@ function addMarkers(map) {
         markers.push(marker)
     }
     return map;
+}
+
+function addRedLine(map) {
+    var redLinePath = makePath();
+    var redLine = new google.maps.Polyline({
+        path: redLinePath,
+        geodesic: true,
+        map: map,
+        strokeColor: '#ff0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+    });
+    return map;
+}
+
+function makePath() {
+    var path = [
+        {lat: stations["Alewife"][0], lng: stations["Alewife"][1]},
+        {lat: stations["Davis"][0], lng: stations["Davis"][1]},
+        {lat: stations["Porter Square"][0], lng: stations["Porter Square"][1]},
+        {lat: stations["Harvard Square"][0], lng: stations["Harvard Square"][1]},
+        {lat: stations["Central Square"][0], lng: stations["Central Square"][1]},
+        {lat: stations["Kendall/MIT"][0], lng: stations["Kendall/MIT"][1]},
+        {lat: stations["Charles/MGH"][0], lng: stations["Charles/MGH"][1]},
+        {lat: stations["Park Street"][0], lng: stations["Park Street"][1]},
+        {lat: stations["Downtown Crossing"][0], lng: stations["Downtown Crossing"][1]},
+        {lat: stations["South Station"][0], lng: stations["South Station"][1]},
+        {lat: stations["Broadway"][0], lng: stations["Broadway"][1]},
+        {lat: stations["Andrew"][0], lng: stations["Andrew"][1]},
+        {lat: stations["JFK/UMass"][0], lng: stations["JFK/UMass"][1]},
+        {lat: stations["Savin Hill"][0], lng: stations["Savin Hill"][1]},
+        {lat: stations["Fields Corner"][0], lng: stations["Fields Corner"][1]},
+        {lat: stations["Shawmut"][0], lng: stations["Shawmut"][1]},
+        {lat: stations["Ashmont"][0], lng: stations["Ashmont"][1]}
+    ];
+    return path;
 }
