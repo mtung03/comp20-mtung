@@ -40,6 +40,19 @@ function init()
     // Create the map in the "map_canvas" <div>
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
+    map = addMarkers(map);
+
+  //     var flightPath = new google.maps.Polyline({
+  //   path: flightPlanCoordinates,
+  //   geodesic: true,
+  //   strokeColor: '#FF0000',
+  //   strokeOpacity: 1.0,
+  //   strokeWeight: 2
+  // });
+
+}
+
+function addMarkers(map) {
     // Create a marker      
     var redLineIcon = "images/red_line.png"
 
@@ -55,4 +68,5 @@ function init()
         });
         markers.push(marker)
     }
+    return map;
 }
