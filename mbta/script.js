@@ -28,12 +28,12 @@ var stations = {
 function init()
 {
     // originate map at south station for now
-    var start = new google.maps.LatLng(42.3599611, -71.0567528);
+    var start = new google.maps.LatLng(stations["South Station"][0], stations["South Station"][1]);
 
     // Set up map
     var myOptions = {
-        zoom: 13, // The larger the zoom number, the bigger the zoom
-        center: landmark,
+        zoom: 13, 
+        center: start,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     
@@ -42,12 +42,12 @@ function init()
 
     // Create a marker              
     var marker = new google.maps.Marker({
-        position: landmark,
-        title: "Faneuil Hall, Boston, MA"
+        position: start,
+        title: "South Station, Red Line"
     });
     marker.setMap(map);
     
-    // This is a global info window...
+    // This is a googlelobal info window...
     var infowindow = new google.maps.InfoWindow();
     
     // Open info window on click of marker
