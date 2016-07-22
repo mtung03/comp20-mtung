@@ -40,9 +40,12 @@ function init()
     // Create the map in the "map_canvas" <div>
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-    // Create a marker              
+    // Create a marker      
+    var redLineIcon = "images/red_line.png"
+        
     var marker = new google.maps.Marker({
         position: start,
+        icon: redLineIcon,
         title: "South Station, Red Line"
     });
     marker.setMap(map);
