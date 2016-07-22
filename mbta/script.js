@@ -42,20 +42,17 @@ function init()
 
     // Create a marker      
     var redLineIcon = "images/red_line.png"
-        
-    var marker = new google.maps.Marker({
-        position: start,
-        icon: redLineIcon,
-        title: "South Station, Red Line"
-    });
-    marker.setMap(map);
-    
-    // This is a googlelobal info window...
-    var infowindow = new google.maps.InfoWindow();
-    
-    // Open info window on click of marker
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(marker.title);
-        infowindow.open(map, marker);
-    });
+
+    var markers = [];
+
+    // add markers for each station
+    for (var key in stations) {
+        var marker = new google.maps.Marker({
+            position: {lat: stations[key][0], lng: stations[key][1]},
+            icon: redLineIcon,
+            map: map,
+            title: key
+        });
+        markers.push(marker)
+    }
 }
