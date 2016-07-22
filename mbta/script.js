@@ -66,14 +66,25 @@ function addMarkers(map) {
 
 function addRedLine(map) {
     var redLinePath = makePath();
+    var braintreeBranch = makeBranch();
+
     var redLine = new google.maps.Polyline({
         path: redLinePath,
         geodesic: true,
         map: map,
         strokeColor: '#ff0000',
         strokeOpacity: 1.0,
-        strokeWeight: 2
+        strokeWeight: 3
     });
+    var braintreeRoute = new google.maps.Polyline({
+        path: braintreeBranch,
+        geodesic: true,
+        map: map,
+        strokeColor: '#ff0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 3
+    });
+
     return map;
 }
 
@@ -98,4 +109,15 @@ function makePath() {
         {lat: stations["Ashmont"][0], lng: stations["Ashmont"][1]}
     ];
     return path;
+}
+
+function makeBranch() {
+    return [
+        {lat: stations["JFK/UMass"][0], lng: stations["JFK/UMass"][1]},
+        {lat: stations["North Quincy"][0], lng: stations["North Quincy"][1]},
+        {lat: stations["Wollaston"][0], lng: stations["Wollaston"][1]},
+        {lat: stations["Quincy Center"][0], lng: stations["Quincy Center"][1]},
+        {lat: stations["Quincy Adams"][0], lng: stations["Quincy Adams"][1]},
+        {lat: stations["Braintree"][0], lng: stations["Braintree"][1]}
+    ];
 }
