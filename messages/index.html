@@ -3,28 +3,15 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <title>Messages</title>
-  <script>
-    function parse() {
-      jsonData = '[{"id":1,"content":"Do you really want to hurt me?","username":"Boy"},{"id":2,"content":"Do you really want to make me cry?","username":"George"}]';
-
-      var data = JSON.parse(jsonData);
-
-      message_section = "";
-
-      for (i = 0; i < data.length; i++) {
-        message_section = message_section + "<p id=\"message\">" + data[i]["content"] + "<span id=\"sender\">" + data[i]["username"] + "</span></p>"; 
-      }
-      
-      document.getElementById("messages").innerHTML = message_section;
-    }
-  </script>
+	<meta charset="utf-8" />
+	<title>Messages</title>
+	<script src="lab.js"></script>
+	<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
 <body onload="parse()">
-  <h1>Messages</h1>
-  <div id="messages"></div>
+	<h1>Messages</h1>
+	<div id="messages"></div>
 </body>
 
 </html>
