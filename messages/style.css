@@ -1,1 +1,17 @@
-/* Your CSS here... */
+.body {
+}
+
+#messages {
+	text-align: center;
+}
+
+.messageWrapper {
+	margin-bottom: 30px;
+}
+
+.messageBody {
+	color: white;
+	background-color: blue;
+	border-radius: 15px;
+	padding: 10px;
+}
