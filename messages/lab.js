@@ -4,7 +4,7 @@ var request = new XMLHttpRequest();
 
 function parse() {
 
-	request.open("GET", "data.json", true);
+	request.open("GET", "file:///root/Desktop/comp20/comp20-mtung/messages/data.json", true);
 
 	request.onreadystatechange = function() {
 		if (request.readyState == 4 && request.status == 200) {
