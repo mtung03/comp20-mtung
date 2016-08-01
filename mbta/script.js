@@ -25,24 +25,83 @@ var stations = {
  "Central Square":    [   42.365486 ,         -71.103802],
  "Braintree":         [  42.2078543 ,        -71.0011385], };
 
+var request = new XMLHttpRequest();  // for getting train info
+
+request.open("GET", "https://powerful-depths-66091.herokuapp.com/redline.json")
+
+request.onreadystatechange = updateTrains;
+
+request.send(null);
+
+var trainData = {};
+
+function updateTrains () {
+    if (request.readyState == 4 && request.status == 200) {
+        result = "";
+        raw = request.responseText;
+        trainData = JSON.parse(raw);
+        console.log(trainData);
+    }
+};
+
+var myLat = 0;
+var myLng = 0;
+
+var me = new google.maps.LatLng(myLat, myLng);
+var myOptions = {
+            zoom: 13, // The larger the zoom number, the bigger the zoom
+            center: me,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+var map;
+var marker;
+var infowindow = new google.maps.InfoWindow();
+
 function init()
 {
-    // originate map at south station for now
-    var start = new google.maps.LatLng(stations["South Station"][0], stations["South Station"][1]);
-
-    // Set up map
-    var myOptions = {
-        zoom: 13, 
-        center: start,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    
-    // Create the map in the "map_canvas" <div>
-    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-    map = addMarkers(map);
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    getMyLocation();
     map = addRedLine(map);
+    map = addMarkers(map);
+}
 
+function getMyLocation() {
+    if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
+        navigator.geolocation.getCurrentPosition(function(position) {
+            myLat = position.coords.latitude;
+            myLng = position.coords.longitude;
+            renderMap();
+        });
+    }
+    else {
+        alert("Geolocation is not supported by your web browser.  What a shame!");
+    }
+}
+
+function renderMap()
+{
+    me = new google.maps.LatLng(myLat, myLng);
+    
+    // Update map and go there...
+    map.panTo(me);
+
+    var closestStation = getClosestStation();
+
+    var trainTimes = parseTrainData(closestStation);
+
+    // Create a marker
+    marker = new google.maps.Marker({
+        position: me,
+        title: "My Location",
+        content: "Closest Station is " + closestStation + "\n" + trainTimes
+    });
+    marker.setMap(map);
+        
+    // Open info window on click of marker
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(marker.content);
+        infowindow.open(map, marker);
+    });
 }
 
 function addMarkers(map) {
@@ -59,6 +118,11 @@ function addMarkers(map) {
             map: map,
             title: key
         });
+        var infoWindow = new google.maps.InfoWindow();
+        google.maps.event.addListener(marker, 'click', function () {
+                                infoWindow.setContent(this.title);
+                                infoWindow.open(map, this);
+                            });
         markers.push(marker)
     }
     return map;
@@ -120,4 +184,12 @@ function makeBranch() {
         {lat: stations["Quincy Adams"][0], lng: stations["Quincy Adams"][1]},
         {lat: stations["Braintree"][0], lng: stations["Braintree"][1]}
     ];
+}
+
+function getClosestStation() {
+    return "Davis";
+}
+
+function parseTrainData(closestStation) {
+    return "in two minutes";
 }
