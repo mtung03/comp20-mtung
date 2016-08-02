@@ -187,9 +187,43 @@ function makeBranch() {
 }
 
 function getClosestStation() {
-    return "Davis";
+    var currClosest = "Braintree";
+    var currDist = myDistance(stations["Braintree"]);
+    for (station in stations) {
+        var tempDist = myDistance(stations[station]);
+        if (tempDist < currDist) {
+            currClosest = station;
+            currDist = tempDist;
+        }
+    }
+    return currClosest + " is " + currDist + " miles away";
 }
 
 function parseTrainData(closestStation) {
     return "in two minutes";
+}
+
+function myDistance(stationLocation) { /* function from stackoverflow user talkol */
+    Number.prototype.toRad = function() {
+       return this * Math.PI / 180;
+    }
+
+    var lat2 = stationLocation[0]; 
+    var lon2 = stationLocation[1]; 
+    var lat1 = myLat; 
+    var lon1 = myLng; 
+
+    var R = 6371; // km 
+    //has a problem with the .toRad() method below.
+    var x1 = lat2-lat1;
+    var dLat = x1.toRad();  
+    var x2 = lon2-lon1;
+    var dLon = x2.toRad();  
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+                    Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+                    Math.sin(dLon/2) * Math.sin(dLon/2);  
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; 
+
+    return d;
 }
