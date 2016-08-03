@@ -88,6 +88,8 @@ function renderMap()
 
     var trainTimes = parseTrainData(closestStation);
 
+    console.log(trainTimes);
+
     // Create a marker
     marker = new google.maps.Marker({
         position: me,
@@ -205,14 +207,16 @@ function parseTrainData(closestStation) {
     var timeToTrains = [];
     var trips = trainData["TripList"]["Trips"];
     for (i = 0; i < trips.length; i++) {
-        for (j = 0; j < trips[i]["Predictions"].length; j++) {
-            if (trips[i]["Predictions"][j]["Stop"] == closestStation[0]) {
-                timeToTrains.push(trips[i]["Predictions"][j]["Seconds"]);
-                console.log("hey " +trips[i]["Predictions"][j]["Seconds"]);
+        j = 0;
+        predictions = trips[i]["Predictions"];
+        for (stop in predictions) {
+            //console.log(predictions[stop]["Stop"]);
+            if (predictions[stop]["Stop"] == closestStation[0]) {
+                timeToTrains.push(predictions[stop]["Seconds"]);
             }
         }
     }
-    return timeToTrains;
+    return timeToTrains.sort( function (a, b) {return a > b;});
 }
 
 function myDistance(stationLocation) { /* function from stackoverflow user talkol */
