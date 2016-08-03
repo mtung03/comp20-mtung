@@ -86,6 +86,8 @@ function renderMap()
 
     var closestStation = getClosestStation();
 
+    renderLineToStation(closestStation);
+
     // Create a marker
     marker = new google.maps.Marker({
         position: me,
@@ -98,6 +100,22 @@ function renderMap()
     google.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(marker.content);
         infowindow.open(map, marker);
+    });
+}
+
+function renderLineToStation(station) {
+    var meToStation = [
+        {lat: stations[station[0]][0], lng: stations[station[0]][1]},
+        {lat: myLat, lng: myLng}
+    ];
+
+    var lineToStation = new google.maps.Polyline({
+        path: meToStation,
+        geodesic: true,
+        map: map,
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.5,
+        strokeWeight: 2
     });
 }
 
