@@ -40,7 +40,6 @@ function updateTrains () {
         result = "";
         raw = request.responseText;
         trainData = JSON.parse(raw);
-        console.log(trainData);
     }
 };
 
@@ -93,7 +92,7 @@ function renderMap()
     marker = new google.maps.Marker({
         position: me,
         title: "My Location",
-        content: "Closest Station is " + closestStation + "\n" + trainTimes
+        content: "Closest Station is " + closestStation[0] + "\n" + trainTimes
     });
     marker.setMap(map);
         
@@ -196,11 +195,24 @@ function getClosestStation() {
             currDist = tempDist;
         }
     }
-    return currClosest + " is " + currDist + " miles away";
+    return [currClosest, currDist];
 }
 
 function parseTrainData(closestStation) {
-    return "in two minutes";
+    // console.log(trainData);
+    // console.log(trainData["TripList"]);
+    // console.log(trainData["TripList"]["Trips"]);
+    var timeToTrains = [];
+    var trips = trainData["TripList"]["Trips"];
+    for (i = 0; i < trips.length; i++) {
+        for (j = 0; j < trips[i]["Predictions"].length; j++) {
+            if (trips[i]["Predictions"][j]["Stop"] == closestStation[0]) {
+                timeToTrains.push(trips[i]["Predictions"][j]["Seconds"]);
+                console.log("hey " +trips[i]["Predictions"][j]["Seconds"]);
+            }
+        }
+    }
+    return timeToTrains;
 }
 
 function myDistance(stationLocation) { /* function from stackoverflow user talkol */
