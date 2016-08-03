@@ -88,19 +88,12 @@ function renderMap()
 
     var trainTimes = parseTrainData(closestStation);
 
-    var formattedTimes = "";
-
-    for (i = 0; i < trainTimes.length; i++) {
-        formattedTimes += trainTimes[i] + " seconds</br>";
-    }
-
-    console.log(trainTimes);
 
     // Create a marker
     marker = new google.maps.Marker({
         position: me,
         title: "My Location",
-        content: "The closest Station is " + closestStation[0] + ", " + closestStation[1] + " km away.</br> Next trains come in " + formattedTimes
+        content: "The closest T station is " + closestStation[0] + ", " + closestStation[1] + " km away."
     });
     marker.setMap(map);
         
@@ -127,12 +120,32 @@ function addMarkers(map) {
         });
         var infoWindow = new google.maps.InfoWindow();
         google.maps.event.addListener(marker, 'click', function () {
-                                infoWindow.setContent(this.title);
+                                infoWindow.setContent(getTrains(this));
                                 infoWindow.open(map, this);
                             });
         markers.push(marker)
     }
     return map;
+}
+
+function getTrains(station) {
+    var timeToTrains = [];
+    var trips = trainData["TripList"]["Trips"];
+    for (i = 0; i < trips.length; i++) {
+        j = 0;
+        predictions = trips[i]["Predictions"];
+        for (stop in predictions) {
+            if (predictions[stop]["Stop"] == station.title) {
+                timeToTrains.push([predictions[stop]["Seconds"], trips[i]["Destination"]]);
+            }
+        }
+    }
+    timeToTrains = timeToTrains.sort( function (a, b) {return a[0] > b[0];});
+    returnVal =  "Trains coming in:</br>";
+    for (var i = 0; i < timeToTrains.length; i++) {
+        returnVal += timeToTrains[i][0] + " seconds (" + timeToTrains[i][1] + " bound)</br>";
+    }
+    return returnVal;
 }
 
 function addRedLine(map) {
