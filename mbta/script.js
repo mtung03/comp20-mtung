@@ -88,13 +88,19 @@ function renderMap()
 
     var trainTimes = parseTrainData(closestStation);
 
+    var formattedTimes = "";
+
+    for (i = 0; i < trainTimes.length; i++) {
+        formattedTimes += trainTimes[i] + " seconds</br>";
+    }
+
     console.log(trainTimes);
 
     // Create a marker
     marker = new google.maps.Marker({
         position: me,
         title: "My Location",
-        content: "Closest Station is " + closestStation[0] + "\n" + trainTimes
+        content: "The closest Station is " + closestStation[0] + ", " + closestStation[1] + " km away.</br> Next trains come in " + formattedTimes
     });
     marker.setMap(map);
         
@@ -201,16 +207,12 @@ function getClosestStation() {
 }
 
 function parseTrainData(closestStation) {
-    // console.log(trainData);
-    // console.log(trainData["TripList"]);
-    // console.log(trainData["TripList"]["Trips"]);
     var timeToTrains = [];
     var trips = trainData["TripList"]["Trips"];
     for (i = 0; i < trips.length; i++) {
         j = 0;
         predictions = trips[i]["Predictions"];
         for (stop in predictions) {
-            //console.log(predictions[stop]["Stop"]);
             if (predictions[stop]["Stop"] == closestStation[0]) {
                 timeToTrains.push(predictions[stop]["Seconds"]);
             }
