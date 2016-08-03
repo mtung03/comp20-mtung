@@ -86,9 +86,6 @@ function renderMap()
 
     var closestStation = getClosestStation();
 
-    var trainTimes = parseTrainData(closestStation);
-
-
     // Create a marker
     marker = new google.maps.Marker({
         position: me,
@@ -219,20 +216,6 @@ function getClosestStation() {
     return [currClosest, currDist];
 }
 
-function parseTrainData(closestStation) {
-    var timeToTrains = [];
-    var trips = trainData["TripList"]["Trips"];
-    for (i = 0; i < trips.length; i++) {
-        j = 0;
-        predictions = trips[i]["Predictions"];
-        for (stop in predictions) {
-            if (predictions[stop]["Stop"] == closestStation[0]) {
-                timeToTrains.push(predictions[stop]["Seconds"]);
-            }
-        }
-    }
-    return timeToTrains.sort( function (a, b) {return a > b;});
-}
 
 function myDistance(stationLocation) { /* function from stackoverflow user talkol */
     Number.prototype.toRad = function() {
