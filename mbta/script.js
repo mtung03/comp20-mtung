@@ -27,11 +27,15 @@ var stations = {
 
 var request = new XMLHttpRequest();  // for getting train info
 
-request.open("GET", "https://powerful-depths-66091.herokuapp.com/redline.json")
+var loc_request = new XMLHttpRequest(); // for sending the lat/long of the user
+                                        // to the server
+
+request.open("GET", "https://thawing-scrubland-80096.herokuapp.com/redline.json");
 
 request.onreadystatechange = updateTrains;
 
 request.send(null);
+
 
 var trainData = {};
 
@@ -67,15 +71,29 @@ function init()
 function getMyLocation() {
     if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
         navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position.coords);
             myLat = position.coords.latitude;
             myLng = position.coords.longitude;
             renderMap();
+
+            loc_request.open("POST", "https://thawing-scrubland-80096.herokuapp.com/redline");
+            loc_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var toSend = "latitude=" + myLat + "&longitude=" + myLng;
+            loc_request.send(toSend);
+
+            loc_request.onreadystatechange = test;
+            function test() {
+                console.log(toSend);
+                console.log(loc_request.readyState);
+                console.log(myLng);
+            }
         });
     }
     else {
         alert("Geolocation is not supported by your web browser.  What a shame!");
     }
 }
+
 
 function renderMap()
 {
