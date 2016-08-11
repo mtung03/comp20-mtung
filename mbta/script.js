@@ -71,7 +71,7 @@ function init()
 function getMyLocation() {
     if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
         navigator.geolocation.getCurrentPosition(function(position) {
-            console.log(position.coords);
+            
             myLat = position.coords.latitude;
             myLng = position.coords.longitude;
             renderMap();
@@ -80,13 +80,6 @@ function getMyLocation() {
             loc_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             var toSend = "latitude=" + myLat + "&longitude=" + myLng;
             loc_request.send(toSend);
-
-            loc_request.onreadystatechange = test;
-            function test() {
-                console.log(toSend);
-                console.log(loc_request.readyState);
-                console.log(myLng);
-            }
         });
     }
     else {
