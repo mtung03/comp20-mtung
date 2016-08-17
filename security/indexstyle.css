@@ -1,12 +1,23 @@
-table {
+body {
+	max-width: 100%;
+}
+tr {
 	max-width: 100%;
 }
 
-img {
-	max-height: 50px;
+tr td {
+	border-bottom: 1px solid black;
 }
 
-.head {
-	text-decoration: bold;
-	border-bottom: 2px solid black;
+img {
+	max-height: 300px;
+	max-width: 60%;
+}
+
+.head td {
+	text-align: center;
+	font-weight: bold;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
 }
