@@ -1,0 +1,12 @@
+table {
+	max-width: 100%;
+}
+
+img {
+	max-height: 50px;
+}
+
+.head {
+	text-decoration: bold;
+	border-bottom: 2px solid black;
+}
